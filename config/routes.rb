@@ -4,6 +4,14 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
 
+  get "sign_up", to: "registrations#new"
+  post "sign_up", to: "registrations#create"
+
+  get "sign_in", to: "sessions#new"
+  post "sign_in", to: "sessions#create"
+
+  delete "logout", to: "sessions#destroy"
+
   resource :cart, only: [:show] do
     post :add_item
     post :remove_item
@@ -20,7 +28,6 @@ Rails.application.routes.draw do
     get "admin/categories", to: "categoriess#index"
     resources :categories, except: [:delete]
   end
-
 
 
   # The priority is based upon order of creation: first created -> highest priority.
